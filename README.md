@@ -5,18 +5,20 @@ My monster for speed in web-development.
 ## Getting Started
 
 
-On your computer must be installed: Node.js, npm, bower.
+On your PC must be installed: Node.js, npm, bower.
 
 Steps:
-git clone https://github.com/verino/start_build.git
+<ul>
+<li>git clone https://github.com/verino/start_build.git</li>
 
-Rename the folder start_build, give it a new name for the current project.
+<li>Rename the folder start_build, give it a new name for the current project.</li>
 
-In the folder "src" create the folder "libs": mkdir libs.
+<li>In the folder "src" create the folder "libs": mkdir libs.</li>
 
-Remove folder ".git"
+<li>Remove folder ".git"</li>
 
-Git Bash: git init, git add ., git commit -a -m "commit", git status.
+<li>Git Bash: git init, git add ., git commit -a -m "commit", git status.</li>
+</ul>
 
 View the file bower.json and remove unnecessary dependencies and then install the necessary plug-ins using the command
 ```
