@@ -1,0 +1,5 @@
+Thumb.db
+.sass-cache/
+node_modules
+src/libs/
+dist/
