@@ -1,12 +1,18 @@
 # Start_build
 
 My monster for speed in web-development.
-
-## Getting Started
-
-
+## Deployment
 On your PC must be installed: Node.js, npm, bower.
-
+<ul>
+<li>git clone https://github.com/verino/start_build.git</li>
+<li>In the folder "src" create the folder "libs": mkdir libs.</li>
+<li>In root of template, use commands:</li>
+<li>bower i</li>
+<li>npm i</li>
+<li>gulp build</li>
+<li>gulp</li>
+</ul>
+## Getting Started
 Steps:
 <ul>
 <li>git clone https://github.com/verino/start_build.git</li>
