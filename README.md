@@ -1,7 +1,9 @@
 # Start_build
 
 My monster for speed in web-development.
+
 ## Deployment
+
 On your PC must be installed: Node.js, npm, bower.
 <ul>
 <li>git clone https://github.com/verino/start_build.git</li>
@@ -12,7 +14,9 @@ On your PC must be installed: Node.js, npm, bower.
 <li>gulp build</li>
 <li>gulp</li>
 </ul>
+
 ### Getting Started
+
 Steps:
 <ul>
 <li>git clone https://github.com/verino/start_build.git</li>
