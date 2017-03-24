@@ -12,7 +12,7 @@ On your PC must be installed: Node.js, npm, bower.
 <li>gulp build</li>
 <li>gulp</li>
 </ul>
-## Getting Started
+### Getting Started
 Steps:
 <ul>
 <li>git clone https://github.com/verino/start_build.git</li>
