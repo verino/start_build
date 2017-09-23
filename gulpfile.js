@@ -143,9 +143,10 @@ gulp.task('sprite', function() {
 gulp.task('watch', function() {
 
 	// Watch any files in dist/, reload on change
-	gulp.watch('src/components/**/*.scss', ['css','css-libs','style'])
-	gulp.watch('src/css/*', ['css','style'])
-	gulp.watch('src/css/libs.scss', ['css-libs','style'])
+	gulp.watch('src/components/**/*.scss', ['css','css-libs'])
+	gulp.watch('src/css/*', ['css'])
+	gulp.watch('src/template/*.scss', ['css'])
+	gulp.watch('src/css/libs.scss', ['css-libs'])
 	gulp.watch('src/font/*', ['font'])
 	gulp.watch('src/js/custom.js', ['js','script'])
 	gulp.watch('src/js/libs.js', ['js-libs','script'])
