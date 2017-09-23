@@ -22,6 +22,21 @@
   height: auto; // Part 2: Scale the height according to the width, otherwise you get stretching
 }
 
+@mixin inlineblock ($valine: top) {
+  display: inline-block;
+  vertical-align: $valine;
+}
+
+/* --------- centered --------- */
+
+@mixin absolute-center {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  position: absolute;
+}
 
 @mixin tab-focus() {
   // Default
@@ -195,6 +210,32 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-position: 50% 50%;
+}
+
+/* --------- responsive mixins --------- */
+
+@mixin desktop {
+  @media screen and (max-width: 1200px) {
+    @content;
+  }
+}
+
+@mixin laptop {
+  @media screen and (max-width: 992px) {
+    @content;
+  }
+}
+
+@mixin tablets {
+  @media screen and (max-width: 768px) {
+    @content;
+  }
+}
+
+@mixin phones {
+  @media screen and (max-width: 480px) {
+    @content;
+  }
 }
 
 @mixin background-gradient($startColor: #3C3C3C, $endColor: #999999) {
