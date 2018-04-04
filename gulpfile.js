@@ -9,7 +9,6 @@ var gulp = require('gulp'),
 	csscomb = require('gulp-csscomb'),
 	rename = require('gulp-rename'),
 	cssnano = require('gulp-cssnano'),
-	connect = require('gulp-connect'),
 	rigger = require('gulp-rigger'),
 	concat = require('gulp-concat'),
 	uglify = require('gulp-uglifyjs'),
@@ -17,38 +16,43 @@ var gulp = require('gulp'),
 	cache = require('gulp-cache'),
 	cleanCSS = require('gulp-clean-css'),
 	gcmq = require('gulp-group-css-media-queries'),
-	livereload = require('gulp-livereload');
+	browsersync   = require('browser-sync');
 
-gulp.task('connect', function() {
-	connect.server({
-		root: 'dist/',
-		livereload: true
-	});
+gulp.task('browser-sync', function() {
+	browsersync({
+		server: {
+			baseDir: 'dist'
+		},
+		notify: false,
+		// open: false,
+		// tunnel: true,
+		// tunnel: "projectmane", //Demonstration page: http://projectmane.localtunnel.me
+	})
 });
 
 gulp.task('htaccess', function() {
 	return gulp.src('src/.htaccess')
 	.pipe(gulp.dest('dist/'))
-	.pipe(connect.reload());
+	.pipe(browsersync.reload( {stream: true} ))
 });
 
 gulp.task('mail', function() {
 	return gulp.src('src/mail.php')
 	.pipe(gulp.dest('dist/'))
-	.pipe(connect.reload());
+	.pipe(browsersync.reload( {stream: true} ))
 });
 
 gulp.task('html', function() {
 	return gulp.src('src/*.html')
 		.pipe(rigger())
 		.pipe(gulp.dest('dist/'))
-		.pipe(connect.reload());
+		.pipe(browsersync.reload( {stream: true} ))
 });
 
 gulp.task('font', function() {
 	return gulp.src('src/font/*')
 		.pipe(gulp.dest('dist/font/'))
-		.pipe(connect.reload());
+		.pipe(browsersync.reload( {stream: true} ))
 });
 
 
@@ -56,14 +60,14 @@ gulp.task('js-libs', function() {
 	return gulp.src('src/js/libs.js')
 		.pipe(rigger())
 		.pipe(gulp.dest('dist/js'))
-		.pipe(connect.reload());
+		.pipe(browsersync.reload( {stream: true} ))
 });
 
 gulp.task('js', function() {
 	return gulp.src('src/js/custom.js')
 		.pipe(rigger())
 		.pipe(gulp.dest('dist/js/'))
-		.pipe(connect.reload());
+		.pipe(browsersync.reload( {stream: true} ))
 });
 
 gulp.task('script', function() {
@@ -72,7 +76,7 @@ gulp.task('script', function() {
 		.pipe(concat('script.min.js'))
 		.pipe(uglify())
 		.pipe(gulp.dest('dist/js/'))
-		.pipe(connect.reload());
+		.pipe(browsersync.reload( {stream: true} ))
 });
 
 
@@ -87,18 +91,18 @@ gulp.task('css', function() {
 		.pipe(csscomb())
 		.pipe(gcmq())
 		.pipe(gulp.dest('dist/css'))
-		.pipe(connect.reload());
+		.pipe(browsersync.reload( {stream: true} ))
 });
 
 gulp.task('css-libs', function() {
 	return sass('src/css/libs.scss')
 		.on('error', sass.logError)
 		.pipe(gulp.dest('dist/css'))
-		.pipe(connect.reload());
+		.pipe(browsersync.reload( {stream: true} ))
 });
 
 gulp.task('style',['css','css-libs'], function() {
-	return  gulp.src(['dist/css/libs.css','dist/css/main.css'])
+	return  gulp.src(['dist/css/main.css','dist/css/libs.css'])
 		.pipe(concat('style.min.css'))
 		.pipe(cleanCSS({
 			compatibility: 'ie8',
@@ -106,7 +110,7 @@ gulp.task('style',['css','css-libs'], function() {
 		}))
 		.pipe(cssnano())
 		.pipe(gulp.dest('dist/css'))
-		.pipe(connect.reload());
+		.pipe(browsersync.reload( {stream: true} ))
 });
 
 
@@ -143,10 +147,9 @@ gulp.task('sprite', function() {
 gulp.task('watch', function() {
 
 	// Watch any files in dist/, reload on change
-	gulp.watch('src/components/**/*.scss', ['css','css-libs'])
-	gulp.watch('src/css/*', ['css'])
-	gulp.watch('src/template/*.scss', ['css'])
-	gulp.watch('src/css/libs.scss', ['css-libs'])
+	gulp.watch('src/components/**/*.scss', ['css','css-libs','style'])
+	gulp.watch('src/css/*', ['css','style'])
+	gulp.watch('src/css/libs.scss', ['css-libs','style'])
 	gulp.watch('src/font/*', ['font'])
 	gulp.watch('src/js/custom.js', ['js','script'])
 	gulp.watch('src/js/libs.js', ['js-libs','script'])
@@ -167,4 +170,4 @@ gulp.task('clear', function(done) {
 
 gulp.task('build', ['html','htaccess', 'mail', 'font', 'css', 'css-libs','style', 'js', 'js-libs','script', 'sprite', 'images']);
 
-gulp.task('default', ['html', 'connect', 'watch']);
+gulp.task('default', ['html', 'browser-sync', 'watch']);
